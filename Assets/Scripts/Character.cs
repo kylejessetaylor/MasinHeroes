@@ -15,14 +15,13 @@ public class Character : Unit {
     ///Resources
 
     ///Stats
-    [Tooltip("'Strength', 'Agility', 'Intelligence'. Type only one of these three. This determines what style of gear/stats the player should aim for.")]
-    private string heroType = "Strength";
+    public Stat primaryStat = Stat.STRENGTH;
+    public enum Stat { STRENGTH, AGILITY, INTELLIGENCE }
 
     ///Offensive
     private float attackPerLevel;
 
     ///Defensive
-
 
     ///Raw Stats
     private int baseStrength;
@@ -66,7 +65,8 @@ public class Character : Unit {
         baseMana = character.baseMana;
 
         ///Stats
-        heroType = character.heroType;
+        primaryStat = (Stat)character.primaryStat;
+        Debug.Log(primaryStat);
 
         //Offensive
         baseAttackDamage = character.baseAttackDamage;
@@ -85,6 +85,12 @@ public class Character : Unit {
         strPerLevel = character.strPerLevel;
         agiPerLevel = character.agiPerLevel;
         intPerLevel = character.intPerLevel;
+
+        //Abilities
+        for (int i = 0; i < character.abilities.Count; i++)
+        {
+            abilities.Add(character.abilities[i]);
+        }
 }
 
     protected new void Awake()
@@ -165,17 +171,17 @@ public class Character : Unit {
         //AutoAttack
         #region Attack
         //Strength
-        if (heroType == "Strength")
+        if (primaryStat == Stat.STRENGTH)
         {
             statDamageBonus = (int)(strength * SystemsManager.statToAttack);
         }
         //Agility
-        else if (heroType == "Agility")
+        else if (primaryStat == Stat.AGILITY)
         {
             statDamageBonus = (int)(agility * SystemsManager.statToAttack);
         }
         //Intelligence
-        else if (heroType == "Intelligence")
+        else if (primaryStat == Stat.INTELLIGENCE)
         {
             statDamageBonus = (int)(intelligence * SystemsManager.statToAttack);
         }
@@ -197,11 +203,12 @@ public class Character : Unit {
 
     [Header("UI Naviation")]
 
-    public Image spellOne;
-    public Image spellTwo;
-    public Image spellThree;
-    public Image spellFour;
-    public Image spellFive;
+    public Image passiveIcon;
+    public Image spellOneIcon;
+    public Image spellTwoIcon;
+    public Image spellThreeIcon;
+    public Image spellFourIcon;
+    public Image spellFiveIcon;
 
     public Image strengthIcon;
     public Image agilityIcon;
@@ -216,28 +223,35 @@ public class Character : Unit {
         //characterIcon
         characterIconImage.sprite = characterIcon;
 
+        //Passive
+        passiveIcon.sprite = abilities[0].icon;
         //Spell 1
+        spellOneIcon.sprite = abilities[1].icon;
         //Spell 2
+        spellTwoIcon.sprite = abilities[2].icon;
         //Spell 3
+        spellThreeIcon.sprite = abilities[3].icon;
         //Spell 4
+        spellFourIcon.sprite = abilities[4].icon;
         //Spell 5
+        spellFiveIcon.sprite = abilities[5].icon;
 
         #region PrimaryStatIcon
 
         Image primaryIcon = null;
 
         //Strength
-        if (heroType == "Strength")
+        if (primaryStat == Stat.STRENGTH)
         {
             primaryIcon = strengthIcon;
         }
         //Agility
-        else if (heroType == "Agility")
+        else if (primaryStat == Stat.AGILITY)
         {
             primaryIcon = agilityIcon;
         }
         //Intelligence
-        else if (heroType == "Intelligence")
+        else if (primaryStat == Stat.INTELLIGENCE)
         {
             primaryIcon = intelligenceIcon;
         }
@@ -339,6 +353,7 @@ public class Character : Unit {
         currentMana = maxMana;
 
         UpdateCharacterDisplay();
+
     }
 	
 	void Update () {

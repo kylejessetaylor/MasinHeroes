@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: Wisdom(A)_3
+  m_EditorClassIdentifier: Assembly-CSharp::Ability
+  abilityName: Wisdom's Boon
+  flavour: "\u201CYou shall fight with my knowledge at levels beyond your capabilities
+    so that we may destroy those suffering from light\u2019s grace.\u201D"
+  description: "Increases friendly target\u2019s damage by INTx1 STRx1 AGIx1, 100%
+    AS, and max MS. 40 second duration (100 sec CD)."
+  icon: {fileID: 21300000, guid: 3bd3081e0b8aa464d814d109f1a8cec5, type: 3}
+  levelUnlock: 17
+  active: 1
+  target: 1
+  hotkey: 51
+  strength: 1
+  agility: 1
+  intelligence: 1

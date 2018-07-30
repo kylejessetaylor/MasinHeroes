@@ -11,11 +11,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6346f52479de1e94883929b0e81cd439, type: 3}
   m_Name: -Wisdom-
   m_EditorClassIdentifier: 
-  characterName: Wisdom, Lord of Knowledge
+  characterName: Mikail, Lord of Knowledge
   characterIcon: {fileID: 21300000, guid: 350f1807d46c1ab4b92c105ebb58459d, type: 3}
+  primaryStat: 2
+  abilities:
+  - {fileID: 11400000, guid: 460f13c1afe803a44b4cfdb02600a0c7, type: 2}
+  - {fileID: 11400000, guid: a01e5be2d379aec4db3f25653925f714, type: 2}
+  - {fileID: 11400000, guid: 963bbcf057d5dae41901a1c7ac9bf921, type: 2}
+  - {fileID: 11400000, guid: 6bde2615b69850f46928e29eaf64ccf8, type: 2}
+  - {fileID: 11400000, guid: b72736ba5e842a045837d30f2ed2858a, type: 2}
+  - {fileID: 11400000, guid: 008f8ad77283c014eb5bc466328f40f7, type: 2}
   baseHealth: 300
   baseMana: 500
-  heroType: Intelligence
   baseAttackDamage: 5
   attackPerLevel: 2.75
   melee: 0

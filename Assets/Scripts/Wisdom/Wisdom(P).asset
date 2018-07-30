@@ -9,10 +9,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 0}
-  m_Name: AbilityName (5)
+  m_Name: Wisdom(P)
   m_EditorClassIdentifier: Assembly-CSharp::Ability
-  abilityName: 
-  flavour: 
-  desc: 
+  abilityName: Knowledge of thy Enemy
+  flavour: '"My Wisdom Conquers all."'
+  description: Damage - INTx2, STRx1, AGIx1.\nINT + 77.
+  icon: {fileID: 21300000, guid: 79815596dedacd74f885d1116113d9d7, type: 3}
+  levelUnlock: 18
   active: 0
-  key: 53
+  target: 0
+  hotkey: 0
+  strength: 1
+  agility: 1
+  intelligence: 2

@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: Wisdom(A)_4
+  m_EditorClassIdentifier: Assembly-CSharp::Ability
+  abilityName: Illustrious Discourse
+  flavour: "\u201CWisdom is knowledge, knowledge is truth. Let our truth blind our
+    enemies in enveloping light.\u201D"
+  description: Sanctifies all units within near you. Dealing INTx100 + STRx50 + AGIx70
+    damage to enemies.\nAllies are healed for INTx2 health (77 sec CD).
+  icon: {fileID: 21300000, guid: afd11f5521d6944429a30663deb49b0b, type: 3}
+  levelUnlock: 30
+  active: 1
+  target: 2
+  hotkey: 52
+  strength: 50
+  agility: 70
+  intelligence: 100

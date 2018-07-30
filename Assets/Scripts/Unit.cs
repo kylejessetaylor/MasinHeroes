@@ -9,6 +9,8 @@ public class Unit : MonoBehaviour {
     [Header("Character Statistics")]
     public CharacterStats character;
 
+    //Spells
+    [Tooltip("Place in order: 'Passive, Active1, Active2, Active3... Active5'")]
     public List<Ability> abilities = new List<Ability>();
 
     //Character

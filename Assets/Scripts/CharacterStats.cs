@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 [CreateAssetMenu(fileName = "New Character", menuName ="Character")]
 public class CharacterStats : ScriptableObject {
 
@@ -9,14 +11,18 @@ public class CharacterStats : ScriptableObject {
     public string characterName;
     public Sprite characterIcon;
 
+    ///Stats
+    public Stat primaryStat = Stat.STRENGTH;
+    public enum Stat { STRENGTH, AGILITY, INTELLIGENCE }
+
+    //Spells
+    [Tooltip("Place in order: 'Passive, Active1, Active2, Active3... Active5'")]
+    public List<Ability> abilities = new List<Ability>();
+
     //Resources
     [Header("Resources")]
     public int baseHealth;
     public int baseMana;
-
-    ///Stats
-    [Tooltip("'Strength', 'Agility', 'Intelligence'. Type only one of these three. This determines what style of gear/stats the player should aim for.")]
-    public string heroType = "Strength";
 
     //Offensive
     public int baseAttackDamage;
