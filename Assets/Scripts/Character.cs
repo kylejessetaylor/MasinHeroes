@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-public class Character : Unit {
+public class Character : UnitScript {
 
     [Header("Character Statistics")]
 
@@ -60,13 +60,15 @@ public class Character : Unit {
         characterName = character.characterName;
         characterIcon = character.characterIcon;
 
+        //Unit Type
+        unitType = (Unit)character.unitType;
+
         //Resources
         baseHealth = character.baseHealth;
         baseMana = character.baseMana;
 
         ///Stats
         primaryStat = (Stat)character.primaryStat;
-        Debug.Log(primaryStat);
 
         //Offensive
         baseAttackDamage = character.baseAttackDamage;
@@ -95,6 +97,9 @@ public class Character : Unit {
 
     protected new void Awake()
     {
+        //Sets player's hero as the current selected target in GameManager class
+        GameManager.selectedTarget = gameObject;
+
         //Apply ScriptableObject 'CharacterStats' stats
         ApplyScriptableObjectStats();
 
@@ -102,7 +107,7 @@ public class Character : Unit {
         FirstCharacterDisplay();
         //Calculates all stats for this character
         UpdateAllStats();
- 
+
     }
 
     //Call when swapping in/out items & on Awake
@@ -272,6 +277,16 @@ public class Character : Unit {
     //Updates all numbers onto UI
     protected new void UpdateCharacterDisplay()
     {
+        //Checks if this unit is current selected target
+        if (GameManager.selectedTarget != gameObject)
+        {
+            return;
+        }
+        else
+        {
+            //Turn on all character-based UI
+        }
+
         //currentHealth/maxHealth
         //currentMana/maxMana
         UpdateHealthManaTexT();
@@ -347,24 +362,35 @@ public class Character : Unit {
 
     //---------------------------------------------------------------------------------------------------------------------//
 
-    void Start () {
+    void Start()
+    {
+        //Assigns this unit to the UnitManager class
+        UnitToUnitManager(true);
+
         //Current HP/Mana
         currentHealth = maxHealth;
         currentMana = maxMana;
 
-        UpdateCharacterDisplay();
+        //Updates UI current health/mana
+        UpdateHealthManaTexT();
 
+        //Setup for AutoAttack functions
+        AutoAttackStart();
     }
-	
-	void Update () {
 
-        //Resource Regen of Health & Mana
-        HealthManaRegen();
+    void Update () {
+
 
 	}
 
     //---------------------------------------------------------------------------------------------------------------------//
+    ///Combat
 
+    //Heroes's Autoattack Damage
+    private new void AutoAttack()
+    {
+
+    }
     //Regenerates health & mana constantly when possible
     private new void HealthManaRegen()
     {

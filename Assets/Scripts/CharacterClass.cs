@@ -5,11 +5,15 @@ using UnityEngine;
 
 
 [CreateAssetMenu(fileName = "New Character", menuName ="Character")]
-public class CharacterStats : ScriptableObject {
+public class CharacterClass : ScriptableObject {
 
     //Character
     public string characterName;
     public Sprite characterIcon;
+
+    ///Type of unit
+    public Unit unitType = Unit.CONTROLLABLE;
+    public enum Unit { CONTROLLABLE, FRIENDLY, NEUTRAL, HOSTILE }
 
     ///Stats
     public Stat primaryStat = Stat.STRENGTH;

@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 114274305141982242}
   m_Layer: 0
   m_Name: Character
-  m_TagString: Untagged
+  m_TagString: Unit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -113,6 +113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 11400000, guid: b10bd31be7658e14aacfa39641dd84c1, type: 2}
+  unitType: 0
   abilities:
   - {fileID: 0}
   - {fileID: 0}
@@ -123,33 +124,36 @@ MonoBehaviour:
   additionalHealth: 0
   currentMana: 1
   additionalMana: 0
+  detectionRange: 0
   additionalAttackDamage: 0
   totalAttackDamage: 0
   additionalArmor: 0
   additionalPhysicalDefense: 0
   additionalMagicallDefense: 0
-  additionalStrength: 0
-  totalStrength: 0
-  additionalAgility: 0
-  totalAgility: 0
-  additionalIntelligence: 0
-  totalIntelligence: 0
   characterNameText: {fileID: 0}
   characterIconImage: {fileID: 0}
-  spellOne: {fileID: 0}
-  spellTwo: {fileID: 0}
-  spellThree: {fileID: 0}
-  spellFour: {fileID: 0}
-  spellFive: {fileID: 0}
-  strengthIcon: {fileID: 0}
-  agilityIcon: {fileID: 0}
-  intelligenceIcon: {fileID: 0}
   healthText: {fileID: 0}
   manaText: {fileID: 0}
   attackText: {fileID: 0}
   additionalAttackText: {fileID: 0}
   armorText: {fileID: 0}
   additionalArmorText: {fileID: 0}
+  primaryStat: 0
+  additionalStrength: 0
+  totalStrength: 0
+  additionalAgility: 0
+  totalAgility: 0
+  additionalIntelligence: 0
+  totalIntelligence: 0
+  passiveIcon: {fileID: 0}
+  spellOneIcon: {fileID: 0}
+  spellTwoIcon: {fileID: 0}
+  spellThreeIcon: {fileID: 0}
+  spellFourIcon: {fileID: 0}
+  spellFiveIcon: {fileID: 0}
+  strengthIcon: {fileID: 0}
+  agilityIcon: {fileID: 0}
+  intelligenceIcon: {fileID: 0}
   strengthText: {fileID: 0}
   additionalSTRText: {fileID: 0}
   agilityText: {fileID: 0}

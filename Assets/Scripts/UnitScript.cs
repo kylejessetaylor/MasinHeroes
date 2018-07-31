@@ -4,10 +4,14 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-public class Unit : MonoBehaviour {
+public class UnitScript : MonoBehaviour {
 
     [Header("Character Statistics")]
-    public CharacterStats character;
+    public CharacterClass character;
+
+    ///Type of unit
+    public Unit unitType = Unit.CONTROLLABLE;
+    public enum Unit { CONTROLLABLE, FRIENDLY, NEUTRAL, HOSTILE }
 
     //Spells
     [Tooltip("Place in order: 'Passive, Active1, Active2, Active3... Active5'")]
@@ -36,8 +40,11 @@ public class Unit : MonoBehaviour {
     public float additionalMana;
 
     ///Offensive
+    //Checks for auto-aggro
+    public float detectionRange;
     protected int baseAttackDamage;
     protected int attackDamage;
+    protected float attackSpeed;
     //Damage gained from items & spells
     [HideInInspector]
     public int additionalAttackDamage;
@@ -75,6 +82,9 @@ public class Unit : MonoBehaviour {
         characterName = character.characterName;
         characterIcon = character.characterIcon;
 
+        //Unit Type
+        unitType = (Unit)character.unitType;
+
         //Resources
         baseHealth = character.baseHealth;
         baseMana = character.baseMana;
@@ -87,7 +97,7 @@ public class Unit : MonoBehaviour {
         //Defensive
         baseArmor = character.baseArmor;
 }
-
+    
     protected void Awake()
     {
         //Apply ScriptableObject 'CharacterStats' stats
@@ -97,7 +107,7 @@ public class Unit : MonoBehaviour {
         FirstCharacterDisplay();
         //Calculates all stats for this character
         UpdateAllStats();
- 
+
     }
 
 
@@ -111,6 +121,7 @@ public class Unit : MonoBehaviour {
 
         //Updates UI with new calculations
         UpdateCharacterDisplay();
+
     }
 
 
@@ -204,6 +215,16 @@ public class Unit : MonoBehaviour {
     //Updates all numbers onto UI
     protected void UpdateCharacterDisplay()
     {
+        //Checks if this unit is current selected target
+        if (GameManager.selectedTarget != gameObject)
+        {
+            return;
+        }
+        else
+        {
+            //Turn on all unit-based UI
+        }
+
         //currentHealth/maxHealth
         //currentMana/maxMana
         UpdateHealthManaTexT();
@@ -238,23 +259,100 @@ public class Unit : MonoBehaviour {
 
     //---------------------------------------------------------------------------------------------------------------------//
 
+    /// <summary>
+    /// Assigns this unit to the UnitManager class
+    /// </summary>
+    /// <param name="add">Set to 'True' if you want to add the unit to the UnitManager class.'False' if you want to remove it.</param>
+    protected void UnitToUnitManager(bool add)
+    {
+        //Adds this unit to UnitManager class
+        if (add)
+        {
+            //Assigns hostile unit
+            if (unitType == Unit.HOSTILE)
+            {
+                UnitManager.hostileUnits.Add(gameObject);
+            }
+            //Assigns neutral unit
+            else if (unitType == Unit.NEUTRAL)
+            {
+                UnitManager.neutralUnits.Add(gameObject);
+            }
+            //Assigns friendly unit
+            else if (unitType == Unit.FRIENDLY)
+            {
+                UnitManager.friendlyUnits.Add(gameObject);
+                UnitManager.alliedUnits.Add(gameObject);
+            }
+            //Assigns controllable unit
+            else if (unitType == Unit.CONTROLLABLE)
+            {
+                UnitManager.controllableUnits.Add(gameObject);
+                UnitManager.alliedUnits.Add(gameObject);
+            }
+            //Debug.Log("Added " + gameObject + " to " + unitType + " list.");
+        }
+        //Removes this unit from UnitManager class
+        else
+        {
+            //Removes hostile unit
+            if (unitType == Unit.HOSTILE)
+            {
+                UnitManager.hostileUnits.Remove(gameObject);
+            }
+            //Removes neutral unit
+            else if (unitType == Unit.NEUTRAL)
+            {
+                UnitManager.neutralUnits.Remove(gameObject);
+            }
+            //Removes friendly unit
+            else if (unitType == Unit.FRIENDLY)
+            {
+                UnitManager.friendlyUnits.Remove(gameObject);
+                UnitManager.alliedUnits.Add(gameObject);
+            }
+            //Removes controllable unit
+            else if (unitType == Unit.CONTROLLABLE)
+            {
+                UnitManager.controllableUnits.Remove(gameObject);
+                UnitManager.alliedUnits.Add(gameObject);
+            }
+            //Debug.Log("Removed " + gameObject + " from " + unitType + " list.");
+        }
+    }
+
+    //---------------------------------------------------------------------------------------------------------------------//
+
     void Start () {
+        //Assigns this unit to the UnitManager class
+        UnitToUnitManager(true);
+
         //Current HP/Mana
         currentHealth = maxHealth;
         currentMana = maxMana;
 
-        UpdateCharacterDisplay();
+        //Updates UI current health/mana
+        UpdateHealthManaTexT();
+
+        //Setup for AutoAttack functions
+        AutoAttackStart();
     }
 	
 	void Update () {
 
+        //Starts Auto-Attack when hostiles are near player or vise versa
+        AutoAttack();
+
+    }
+
+    protected void FixedUpdate()
+    {
         //Resource Regen of Health & Mana
         HealthManaRegen();
-
-	}
+    }
 
     //---------------------------------------------------------------------------------------------------------------------//
-
+    ///Regeneration
 
     protected void UpdateHealthManaTexT()
     {
@@ -267,13 +365,14 @@ public class Unit : MonoBehaviour {
     //Resource Regen
     protected bool fullHealth = true;
     protected bool fullMana = true;
+    private float healthRegenPercent = 0.00001f;
     //Regenerates health & mana constantly when possible
     protected void HealthManaRegen()
     {
         //Health
         if (!fullHealth)
         {
-            currentHealth += 0.0001f * maxHealth * Time.deltaTime;
+            currentHealth += healthRegenPercent * maxHealth * Time.deltaTime;
             //Cancels on full HP
             if (currentHealth >= maxHealth)
             {
@@ -295,6 +394,90 @@ public class Unit : MonoBehaviour {
             }
             //Displays UI
             UpdateHealthManaTexT();
+        }
+    }
+
+    //---------------------------------------------------------------------------------------------------------------------//
+    ///Combat
+
+    //Stores whether unit has moved & needs to check radius
+    protected Vector3 currentTrans;
+    //Target enemy saved as auto-attack target
+    protected GameObject attackTarget;
+    //Signifies unit is trying to auto attack
+    protected bool autoAttacking;
+    
+    protected void AutoAttackStart()
+    {
+        currentTrans = transform.position;
+    }
+
+    //Starts Auto-Attack when hostiles are near player or vise versa
+    protected void AutoAttack()
+    {
+        //If unit has moved
+        if (currentTrans != transform.position)
+        {
+            CheckForEnemies();
+        }
+    }
+
+    //Checks if an enemy is within range
+    ///TODO
+    ///MAKE SURE TO DO THIS CHECK AFTER TARGET ENEMY DIES
+    protected void CheckForEnemies()
+    {
+        //If I'm a friendly
+        if (unitType == Unit.CONTROLLABLE || unitType == Unit.FRIENDLY)
+        {
+            //Checks for hostiles
+            DistanceCheck(UnitManager.hostileUnits);
+        }
+        //If I'm a hostile
+        if (unitType == Unit.HOSTILE)
+        {
+            //Checks for controllable & friendlies
+            DistanceCheck(UnitManager.alliedUnits);
+        }
+
+    }
+
+    //Checks the list of units to see if any of them are within detection range
+    protected void DistanceCheck(List<GameObject> unitListToCheck)
+    {
+        GameObject closestTarget = null;
+        float closestDistance = Mathf.Infinity;
+
+        //Check for hostiles
+        for (int i = 0; i < unitListToCheck.Count - 1; i++)
+        {
+            GameObject target = unitListToCheck[i];
+            float targetDistance = Vector3.Distance(transform.position,
+                target.transform.position);
+            //If a unit is within detection range
+            if (targetDistance <= detectionRange)
+            {
+                //If it's closer than current closest
+                if (targetDistance < closestDistance)
+                {
+                    //Assigns unit as new closest target
+                    closestDistance = targetDistance;
+                    closestTarget = target;
+                }
+                //I am attacking
+                autoAttacking = true;
+            }
+
+        }
+        //Stops auto attacking if no enemy unit is near
+        if (closestTarget == null)
+        {
+            autoAttacking = false;
+        }
+        //Targets closest enemy as the new attack
+        else
+        {
+            attackTarget = closestTarget;
         }
     }
 
