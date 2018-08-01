@@ -365,7 +365,7 @@ public class Character : UnitScript {
     void Start()
     {
         //Assigns this unit to the UnitManager class
-        UnitToUnitManager(true);
+        AssignToUnitManager(true);
 
         //Current HP/Mana
         currentHealth = maxHealth;

@@ -17,6 +17,10 @@ public class UnitScript : MonoBehaviour {
     [Tooltip("Place in order: 'Passive, Active1, Active2, Active3... Active5'")]
     public List<Ability> abilities = new List<Ability>();
 
+    //Combat
+    public Combat combatState = Combat.IDLE;
+    public enum Combat { IDLE, LOOKAT, CHASE, ATTACK, CHANNELCAST }
+
     //Character
     protected string characterName;
     protected Sprite characterIcon;
@@ -73,6 +77,13 @@ public class UnitScript : MonoBehaviour {
     [HideInInspector]
     public float additionalMagicallDefense;
 
+    //Animations
+    [HideInInspector]
+    public Animator anim;
+    protected bool takeDamageAnim;
+    protected bool attackAnim;
+
+
     //---------------------------------------------------------------------------------------------------------------------//
 
     //Apply ScriptableObject 'CharacterStats' stats
@@ -97,7 +108,9 @@ public class UnitScript : MonoBehaviour {
         //Defensive
         baseArmor = character.baseArmor;
 }
-    
+
+    //---------------------------------------------------------------------------------------------------------------------//   
+
     protected void Awake()
     {
         //Apply ScriptableObject 'CharacterStats' stats
@@ -109,6 +122,79 @@ public class UnitScript : MonoBehaviour {
         UpdateAllStats();
 
     }
+
+    void Start()
+    {
+        //Assigns this unit to the UnitManager class
+        AssignToUnitManager(true);
+
+        //Current HP/Mana
+        currentHealth = maxHealth;
+        currentMana = maxMana;
+        //Sets combat state
+        combatState = Combat.IDLE;
+
+        //Assigns Animatior
+        AnimationChecks();
+
+        //Updates UI current health/mana
+        UpdateHealthManaTexT();
+
+        //Setup for AutoAttack functions
+        AutoAttackStart();
+    }
+
+    void Update()
+    {
+        //Starts Auto-Attack when hostiles are near player or vise versa
+        AutoAttack();
+
+        //Checks for Combat States
+        CombatStateChecks();
+
+    }
+
+    protected void FixedUpdate()
+    {
+        //Resource Regen of Health & Mana
+        HealthManaRegen();
+
+        //Turns off animations to keep from looping
+        TurnOffAnimation();
+    }
+
+    //---------------------------------------------------------------------------------------------------------------------//
+
+    //IDLE, LOOKAT, CHASE, ATTACK, CHANNELCAST
+    protected void CombatStateChecks()
+    {
+        //Checks for CHANNELCAST state
+        if (combatState == Combat.CHANNELCAST)
+        {
+            //Start CHANNEL
+        }
+        //Checks for Attack state
+        else if (combatState == Combat.ATTACK)
+        {
+            //Start Attack
+            AttackSpeedCheck();
+        }
+
+        //CHASE starts from Attack State only
+        
+        //Checks for LOOKAT state
+        else if (combatState == Combat.LOOKAT)
+        {
+            //Start LOOKAT
+        }
+        //Checks for IDLE state
+        else if (combatState == Combat.IDLE)
+        {
+            //Start IDLE
+        }
+    }
+
+    //---------------------------------------------------------------------------------------------------------------------//
 
 
     //Call when swapping in/out items & on Awake
@@ -263,7 +349,7 @@ public class UnitScript : MonoBehaviour {
     /// Assigns this unit to the UnitManager class
     /// </summary>
     /// <param name="add">Set to 'True' if you want to add the unit to the UnitManager class.'False' if you want to remove it.</param>
-    protected void UnitToUnitManager(bool add)
+    protected void AssignToUnitManager(bool add)
     {
         //Adds this unit to UnitManager class
         if (add)
@@ -321,34 +407,20 @@ public class UnitScript : MonoBehaviour {
         }
     }
 
-    //---------------------------------------------------------------------------------------------------------------------//
-
-    void Start () {
-        //Assigns this unit to the UnitManager class
-        UnitToUnitManager(true);
-
-        //Current HP/Mana
-        currentHealth = maxHealth;
-        currentMana = maxMana;
-
-        //Updates UI current health/mana
-        UpdateHealthManaTexT();
-
-        //Setup for AutoAttack functions
-        AutoAttackStart();
-    }
-	
-	void Update () {
-
-        //Starts Auto-Attack when hostiles are near player or vise versa
-        AutoAttack();
-
-    }
-
-    protected void FixedUpdate()
+    //Assigns Animations to script variables
+    protected void AnimationChecks()
     {
-        //Resource Regen of Health & Mana
-        HealthManaRegen();
+        anim = gameObject.GetComponent<Animator>();
+    }
+
+    //Turns off Animation bools every FixedUpdate
+    protected void TurnOffAnimation()
+    {
+        //Take Damage Animation
+        anim.SetBool("TakeDamage_Anim", false);
+        //Attack Animation
+        anim.SetBool("Attack_Anim", false);
+
     }
 
     //---------------------------------------------------------------------------------------------------------------------//
@@ -403,7 +475,8 @@ public class UnitScript : MonoBehaviour {
     //Stores whether unit has moved & needs to check radius
     protected Vector3 currentTrans;
     //Target enemy saved as auto-attack target
-    protected GameObject attackTarget;
+    [HideInInspector]
+    public GameObject attackTarget;
     //Signifies unit is trying to auto attack
     protected bool autoAttacking;
     
@@ -431,19 +504,19 @@ public class UnitScript : MonoBehaviour {
         if (unitType == Unit.CONTROLLABLE || unitType == Unit.FRIENDLY)
         {
             //Checks for hostiles
-            DistanceCheck(UnitManager.hostileUnits);
+            DetectionCheck(UnitManager.hostileUnits);
         }
         //If I'm a hostile
         if (unitType == Unit.HOSTILE)
         {
             //Checks for controllable & friendlies
-            DistanceCheck(UnitManager.alliedUnits);
+            DetectionCheck(UnitManager.alliedUnits);
         }
 
     }
 
     //Checks the list of units to see if any of them are within detection range
-    protected void DistanceCheck(List<GameObject> unitListToCheck)
+    protected void DetectionCheck(List<GameObject> unitListToCheck)
     {
         GameObject closestTarget = null;
         float closestDistance = Mathf.Infinity;
@@ -478,8 +551,57 @@ public class UnitScript : MonoBehaviour {
         else
         {
             attackTarget = closestTarget;
+            //Puts unit into attacking state
+            combatState = Combat.ATTACK;
+
         }
     }
+
+    //Used for AttackSpeed
+    protected float timeSinceLastAttack;
+    //Performs attack based on Attack Speed
+    protected void AttackSpeedCheck()
+    {
+        //Checks for attack speed CD
+        if (attackSpeed <= Time.time - timeSinceLastAttack)
+        {
+            Attack();
+        }
+
+    }
+
+    //Checks Range for & Attacks
+    protected void Attack()
+    {
+        //Distance from attack target to player
+        float distanceToTarget = Vector3.Distance(transform.position, attackTarget.transform.position);
+        //Checks if close enough to attack
+        if (distanceToTarget <= range)
+        {
+            //Plays attack animation
+            anim.SetBool("Attack_Anim", true);
+
+            //Checks for UnitScript.cs & deals dmg
+            if (attackTarget.GetComponent<UnitScript>() != null)
+            {
+                //Deals auto attack dmg as physical
+                attackTarget.GetComponent<UnitScript>().DamageToTake(1, attackDamage);
+            }
+            //Checks for Character.cs & deals dmg
+            else
+            {
+                //Deals auto attack dmg as physical
+                attackTarget.GetComponent<Character>().DamageToTake(1, attackDamage);
+            }
+
+        }
+        //Goes to chase instead
+        else
+        {
+            combatState = Combat.CHASE;
+        }
+    }
+    
 
     /// <summary>
     /// Causes the targeted unit to take damage.
@@ -491,6 +613,9 @@ public class UnitScript : MonoBehaviour {
     /// <param name="damage">The amount of damage the unit will take (unmitigated).</param>
     protected void DamageToTake(int damageType, float damage)
     {
+        //Plays Animation
+        anim.SetBool("TakeDamage_Anim", true);
+
         //Phyiscal Damage
         if (damageType == 1)
         {
@@ -506,9 +631,28 @@ public class UnitScript : MonoBehaviour {
         }
 
         //Applies damage to take
-
+        currentHealth -= damage;
+        //Checks for death
+        if (currentHealth < 0)
+        {
+            //Kills unit
+            Death();
+            //Stops Regen & Cancels regen from occuring
+            fullHealth = true;
+            return;
+        }
 
         //Allows HP regen to happen
         fullHealth = false;
+    }
+
+    //Kills this unit
+    protected void Death()
+    {
+        //Removes this unit from UnitManager class
+        AssignToUnitManager(false);
+
+        //Plays Death Animation
+        //Plays Death Sound
     }
 }

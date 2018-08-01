@@ -962,6 +962,173 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 245414639}
   m_Mesh: {fileID: 0}
+--- !u!1001 &256131348
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4104131242136326, guid: 75ecfd3ec73d62443a5c0654499e8cb2, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4104131242136326, guid: 75ecfd3ec73d62443a5c0654499e8cb2, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 1.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4104131242136326, guid: 75ecfd3ec73d62443a5c0654499e8cb2, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4104131242136326, guid: 75ecfd3ec73d62443a5c0654499e8cb2, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4104131242136326, guid: 75ecfd3ec73d62443a5c0654499e8cb2, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4104131242136326, guid: 75ecfd3ec73d62443a5c0654499e8cb2, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4104131242136326, guid: 75ecfd3ec73d62443a5c0654499e8cb2, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4104131242136326, guid: 75ecfd3ec73d62443a5c0654499e8cb2, type: 2}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 114274305141982242, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
+        type: 2}
+      propertyPath: characterNameText
+      value: 
+      objectReference: {fileID: 232409923}
+    - target: {fileID: 114274305141982242, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
+        type: 2}
+      propertyPath: characterIconImage
+      value: 
+      objectReference: {fileID: 1463735463}
+    - target: {fileID: 114274305141982242, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
+        type: 2}
+      propertyPath: healthText
+      value: 
+      objectReference: {fileID: 1856385736}
+    - target: {fileID: 114274305141982242, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
+        type: 2}
+      propertyPath: manaText
+      value: 
+      objectReference: {fileID: 608647345}
+    - target: {fileID: 114274305141982242, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
+        type: 2}
+      propertyPath: attackText
+      value: 
+      objectReference: {fileID: 497504554}
+    - target: {fileID: 114274305141982242, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
+        type: 2}
+      propertyPath: additionalAttackText
+      value: 
+      objectReference: {fileID: 1510988268}
+    - target: {fileID: 114274305141982242, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
+        type: 2}
+      propertyPath: armorText
+      value: 
+      objectReference: {fileID: 1622436269}
+    - target: {fileID: 114274305141982242, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
+        type: 2}
+      propertyPath: additionalArmorText
+      value: 
+      objectReference: {fileID: 1214472886}
+    - target: {fileID: 114274305141982242, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
+        type: 2}
+      propertyPath: passiveIcon
+      value: 
+      objectReference: {fileID: 362703565}
+    - target: {fileID: 114274305141982242, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
+        type: 2}
+      propertyPath: spellOneIcon
+      value: 
+      objectReference: {fileID: 622392730}
+    - target: {fileID: 114274305141982242, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
+        type: 2}
+      propertyPath: spellTwoIcon
+      value: 
+      objectReference: {fileID: 256286654}
+    - target: {fileID: 114274305141982242, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
+        type: 2}
+      propertyPath: spellThreeIcon
+      value: 
+      objectReference: {fileID: 582891188}
+    - target: {fileID: 114274305141982242, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
+        type: 2}
+      propertyPath: spellFourIcon
+      value: 
+      objectReference: {fileID: 402686353}
+    - target: {fileID: 114274305141982242, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
+        type: 2}
+      propertyPath: spellFiveIcon
+      value: 
+      objectReference: {fileID: 914056667}
+    - target: {fileID: 114274305141982242, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
+        type: 2}
+      propertyPath: strengthIcon
+      value: 
+      objectReference: {fileID: 266643542}
+    - target: {fileID: 114274305141982242, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
+        type: 2}
+      propertyPath: agilityIcon
+      value: 
+      objectReference: {fileID: 1573570982}
+    - target: {fileID: 114274305141982242, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
+        type: 2}
+      propertyPath: intelligenceIcon
+      value: 
+      objectReference: {fileID: 1762261882}
+    - target: {fileID: 114274305141982242, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
+        type: 2}
+      propertyPath: strengthText
+      value: 
+      objectReference: {fileID: 73975446}
+    - target: {fileID: 114274305141982242, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
+        type: 2}
+      propertyPath: additionalSTRText
+      value: 
+      objectReference: {fileID: 245414641}
+    - target: {fileID: 114274305141982242, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
+        type: 2}
+      propertyPath: agilityText
+      value: 
+      objectReference: {fileID: 2067672962}
+    - target: {fileID: 114274305141982242, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
+        type: 2}
+      propertyPath: additionalAGIText
+      value: 
+      objectReference: {fileID: 1955613758}
+    - target: {fileID: 114274305141982242, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
+        type: 2}
+      propertyPath: intelligenceText
+      value: 
+      objectReference: {fileID: 960945380}
+    - target: {fileID: 114274305141982242, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
+        type: 2}
+      propertyPath: additionalINTText
+      value: 
+      objectReference: {fileID: 179551632}
+    - target: {fileID: 95308009167236380, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
+        type: 2}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 4878c3ef9c1047f44961832883ef30ce, type: 2}
+    - target: {fileID: 114274305141982242, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 75ecfd3ec73d62443a5c0654499e8cb2, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &256286651
 GameObject:
   m_ObjectHideFlags: 0
@@ -1251,261 +1418,6 @@ RectTransform:
   m_AnchoredPosition: {x: 40.000046, y: 0.0000009536743}
   m_SizeDelta: {x: 160, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1001 &354989221
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 114274305141982242, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
-        type: 2}
-      propertyPath: abilities.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4104131242136326, guid: 75ecfd3ec73d62443a5c0654499e8cb2, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4104131242136326, guid: 75ecfd3ec73d62443a5c0654499e8cb2, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 1.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 4104131242136326, guid: 75ecfd3ec73d62443a5c0654499e8cb2, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4104131242136326, guid: 75ecfd3ec73d62443a5c0654499e8cb2, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4104131242136326, guid: 75ecfd3ec73d62443a5c0654499e8cb2, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4104131242136326, guid: 75ecfd3ec73d62443a5c0654499e8cb2, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4104131242136326, guid: 75ecfd3ec73d62443a5c0654499e8cb2, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4104131242136326, guid: 75ecfd3ec73d62443a5c0654499e8cb2, type: 2}
-      propertyPath: m_RootOrder
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 114274305141982242, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
-        type: 2}
-      propertyPath: characterNameText
-      value: 
-      objectReference: {fileID: 232409923}
-    - target: {fileID: 114274305141982242, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
-        type: 2}
-      propertyPath: characterIconImage
-      value: 
-      objectReference: {fileID: 1463735463}
-    - target: {fileID: 114274305141982242, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
-        type: 2}
-      propertyPath: spellOne
-      value: 
-      objectReference: {fileID: 622392730}
-    - target: {fileID: 114274305141982242, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
-        type: 2}
-      propertyPath: spellTwo
-      value: 
-      objectReference: {fileID: 256286654}
-    - target: {fileID: 114274305141982242, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
-        type: 2}
-      propertyPath: spellThree
-      value: 
-      objectReference: {fileID: 582891188}
-    - target: {fileID: 114274305141982242, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
-        type: 2}
-      propertyPath: spellFour
-      value: 
-      objectReference: {fileID: 402686353}
-    - target: {fileID: 114274305141982242, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
-        type: 2}
-      propertyPath: spellFive
-      value: 
-      objectReference: {fileID: 914056667}
-    - target: {fileID: 114274305141982242, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
-        type: 2}
-      propertyPath: strengthIcon
-      value: 
-      objectReference: {fileID: 266643542}
-    - target: {fileID: 114274305141982242, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
-        type: 2}
-      propertyPath: agilityIcon
-      value: 
-      objectReference: {fileID: 1573570982}
-    - target: {fileID: 114274305141982242, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
-        type: 2}
-      propertyPath: intelligenceIcon
-      value: 
-      objectReference: {fileID: 1762261882}
-    - target: {fileID: 114274305141982242, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
-        type: 2}
-      propertyPath: healthText
-      value: 
-      objectReference: {fileID: 1856385736}
-    - target: {fileID: 114274305141982242, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
-        type: 2}
-      propertyPath: manaText
-      value: 
-      objectReference: {fileID: 608647345}
-    - target: {fileID: 114274305141982242, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
-        type: 2}
-      propertyPath: attackText
-      value: 
-      objectReference: {fileID: 497504554}
-    - target: {fileID: 114274305141982242, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
-        type: 2}
-      propertyPath: additionalAttackText
-      value: 
-      objectReference: {fileID: 1510988268}
-    - target: {fileID: 114274305141982242, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
-        type: 2}
-      propertyPath: armorText
-      value: 
-      objectReference: {fileID: 1622436269}
-    - target: {fileID: 114274305141982242, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
-        type: 2}
-      propertyPath: additionalArmorText
-      value: 
-      objectReference: {fileID: 1214472886}
-    - target: {fileID: 114274305141982242, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
-        type: 2}
-      propertyPath: strengthText
-      value: 
-      objectReference: {fileID: 73975446}
-    - target: {fileID: 114274305141982242, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
-        type: 2}
-      propertyPath: additionalSTRText
-      value: 
-      objectReference: {fileID: 245414641}
-    - target: {fileID: 114274305141982242, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
-        type: 2}
-      propertyPath: agilityText
-      value: 
-      objectReference: {fileID: 2067672962}
-    - target: {fileID: 114274305141982242, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
-        type: 2}
-      propertyPath: additionalAGIText
-      value: 
-      objectReference: {fileID: 1955613758}
-    - target: {fileID: 114274305141982242, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
-        type: 2}
-      propertyPath: intelligenceText
-      value: 
-      objectReference: {fileID: 960945380}
-    - target: {fileID: 114274305141982242, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
-        type: 2}
-      propertyPath: additionalINTText
-      value: 
-      objectReference: {fileID: 179551632}
-    - target: {fileID: 114274305141982242, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
-        type: 2}
-      propertyPath: abilities.Array.data[1]
-      value: 
-      objectReference: {fileID: 11400000, guid: a01e5be2d379aec4db3f25653925f714,
-        type: 2}
-    - target: {fileID: 114274305141982242, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
-        type: 2}
-      propertyPath: abilities.Array.data[2]
-      value: 
-      objectReference: {fileID: 11400000, guid: 963bbcf057d5dae41901a1c7ac9bf921,
-        type: 2}
-    - target: {fileID: 114274305141982242, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
-        type: 2}
-      propertyPath: abilities.Array.data[4]
-      value: 
-      objectReference: {fileID: 11400000, guid: b72736ba5e842a045837d30f2ed2858a,
-        type: 2}
-    - target: {fileID: 114274305141982242, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
-        type: 2}
-      propertyPath: abilities.Array.data[5]
-      value: 
-      objectReference: {fileID: 11400000, guid: 008f8ad77283c014eb5bc466328f40f7,
-        type: 2}
-    - target: {fileID: 114274305141982242, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
-        type: 2}
-      propertyPath: abilities.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: 460f13c1afe803a44b4cfdb02600a0c7,
-        type: 2}
-    - target: {fileID: 114274305141982242, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
-        type: 2}
-      propertyPath: abilities.Array.data[3]
-      value: 
-      objectReference: {fileID: 11400000, guid: 6bde2615b69850f46928e29eaf64ccf8,
-        type: 2}
-    - target: {fileID: 114274305141982242, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
-        type: 2}
-      propertyPath: passiveIcon
-      value: 
-      objectReference: {fileID: 362703565}
-    - target: {fileID: 114274305141982242, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
-        type: 2}
-      propertyPath: spellOneIcon
-      value: 
-      objectReference: {fileID: 622392730}
-    - target: {fileID: 114274305141982242, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
-        type: 2}
-      propertyPath: spellTwoIcon
-      value: 
-      objectReference: {fileID: 256286654}
-    - target: {fileID: 114274305141982242, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
-        type: 2}
-      propertyPath: spellThreeIcon
-      value: 
-      objectReference: {fileID: 582891188}
-    - target: {fileID: 114274305141982242, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
-        type: 2}
-      propertyPath: spellFourIcon
-      value: 
-      objectReference: {fileID: 402686353}
-    - target: {fileID: 114274305141982242, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
-        type: 2}
-      propertyPath: spellFiveIcon
-      value: 
-      objectReference: {fileID: 914056667}
-    - target: {fileID: 4104131242136326, guid: 75ecfd3ec73d62443a5c0654499e8cb2, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 1.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 4104131242136326, guid: 75ecfd3ec73d62443a5c0654499e8cb2, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 1.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 4104131242136326, guid: 75ecfd3ec73d62443a5c0654499e8cb2, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 1.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 54787921854812588, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
-        type: 2}
-      propertyPath: m_AngularDrag
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 54787921854812588, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
-        type: 2}
-      propertyPath: m_Drag
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 114648163943577880, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
-        type: 2}
-      propertyPath: speed
-      value: 80
-      objectReference: {fileID: 0}
-    - target: {fileID: 114648163943577880, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
-        type: 2}
-      propertyPath: maxVelocity
-      value: 20
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 75ecfd3ec73d62443a5c0654499e8cb2, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &361205177
 GameObject:
   m_ObjectHideFlags: 0
@@ -2506,7 +2418,7 @@ CanvasRenderer:
 GameObject:
   m_PrefabParentObject: {fileID: 1578037357715606, guid: 75ecfd3ec73d62443a5c0654499e8cb2,
     type: 2}
-  m_PrefabInternal: {fileID: 354989221}
+  m_PrefabInternal: {fileID: 256131348}
 --- !u!1 &674441443
 GameObject:
   m_ObjectHideFlags: 0
@@ -2607,88 +2519,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!1001 &737549372
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4776080417055234, guid: a2bc731c36b059d4683ea33bef4416b1, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -2.87
-      objectReference: {fileID: 0}
-    - target: {fileID: 4776080417055234, guid: a2bc731c36b059d4683ea33bef4416b1, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: -8.268616e-17
-      objectReference: {fileID: 0}
-    - target: {fileID: 4776080417055234, guid: a2bc731c36b059d4683ea33bef4416b1, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 8.65
-      objectReference: {fileID: 0}
-    - target: {fileID: 4776080417055234, guid: a2bc731c36b059d4683ea33bef4416b1, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4776080417055234, guid: a2bc731c36b059d4683ea33bef4416b1, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4776080417055234, guid: a2bc731c36b059d4683ea33bef4416b1, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4776080417055234, guid: a2bc731c36b059d4683ea33bef4416b1, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4776080417055234, guid: a2bc731c36b059d4683ea33bef4416b1, type: 2}
-      propertyPath: m_RootOrder
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 114542235532527436, guid: a2bc731c36b059d4683ea33bef4416b1,
-        type: 2}
-      propertyPath: characterNameText
-      value: 
-      objectReference: {fileID: 232409923}
-    - target: {fileID: 114542235532527436, guid: a2bc731c36b059d4683ea33bef4416b1,
-        type: 2}
-      propertyPath: characterIconImage
-      value: 
-      objectReference: {fileID: 1463735463}
-    - target: {fileID: 114542235532527436, guid: a2bc731c36b059d4683ea33bef4416b1,
-        type: 2}
-      propertyPath: healthText
-      value: 
-      objectReference: {fileID: 1856385736}
-    - target: {fileID: 114542235532527436, guid: a2bc731c36b059d4683ea33bef4416b1,
-        type: 2}
-      propertyPath: manaText
-      value: 
-      objectReference: {fileID: 608647345}
-    - target: {fileID: 114542235532527436, guid: a2bc731c36b059d4683ea33bef4416b1,
-        type: 2}
-      propertyPath: attackText
-      value: 
-      objectReference: {fileID: 497504554}
-    - target: {fileID: 114542235532527436, guid: a2bc731c36b059d4683ea33bef4416b1,
-        type: 2}
-      propertyPath: additionalAttackText
-      value: 
-      objectReference: {fileID: 1510988268}
-    - target: {fileID: 114542235532527436, guid: a2bc731c36b059d4683ea33bef4416b1,
-        type: 2}
-      propertyPath: armorText
-      value: 
-      objectReference: {fileID: 1622436269}
-    - target: {fileID: 114542235532527436, guid: a2bc731c36b059d4683ea33bef4416b1,
-        type: 2}
-      propertyPath: additionalArmorText
-      value: 
-      objectReference: {fileID: 1214472886}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: a2bc731c36b059d4683ea33bef4416b1, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &748109177
 GameObject:
   m_ObjectHideFlags: 0
@@ -3881,6 +3711,88 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1308818590}
+--- !u!1001 &1443937311
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4776080417055234, guid: a2bc731c36b059d4683ea33bef4416b1, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -2.87
+      objectReference: {fileID: 0}
+    - target: {fileID: 4776080417055234, guid: a2bc731c36b059d4683ea33bef4416b1, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -8.268616e-17
+      objectReference: {fileID: 0}
+    - target: {fileID: 4776080417055234, guid: a2bc731c36b059d4683ea33bef4416b1, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 8.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 4776080417055234, guid: a2bc731c36b059d4683ea33bef4416b1, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4776080417055234, guid: a2bc731c36b059d4683ea33bef4416b1, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4776080417055234, guid: a2bc731c36b059d4683ea33bef4416b1, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4776080417055234, guid: a2bc731c36b059d4683ea33bef4416b1, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4776080417055234, guid: a2bc731c36b059d4683ea33bef4416b1, type: 2}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 114542235532527436, guid: a2bc731c36b059d4683ea33bef4416b1,
+        type: 2}
+      propertyPath: characterNameText
+      value: 
+      objectReference: {fileID: 232409923}
+    - target: {fileID: 114542235532527436, guid: a2bc731c36b059d4683ea33bef4416b1,
+        type: 2}
+      propertyPath: characterIconImage
+      value: 
+      objectReference: {fileID: 1463735463}
+    - target: {fileID: 114542235532527436, guid: a2bc731c36b059d4683ea33bef4416b1,
+        type: 2}
+      propertyPath: healthText
+      value: 
+      objectReference: {fileID: 1856385736}
+    - target: {fileID: 114542235532527436, guid: a2bc731c36b059d4683ea33bef4416b1,
+        type: 2}
+      propertyPath: manaText
+      value: 
+      objectReference: {fileID: 608647345}
+    - target: {fileID: 114542235532527436, guid: a2bc731c36b059d4683ea33bef4416b1,
+        type: 2}
+      propertyPath: attackText
+      value: 
+      objectReference: {fileID: 497504554}
+    - target: {fileID: 114542235532527436, guid: a2bc731c36b059d4683ea33bef4416b1,
+        type: 2}
+      propertyPath: additionalAttackText
+      value: 
+      objectReference: {fileID: 1510988268}
+    - target: {fileID: 114542235532527436, guid: a2bc731c36b059d4683ea33bef4416b1,
+        type: 2}
+      propertyPath: armorText
+      value: 
+      objectReference: {fileID: 1622436269}
+    - target: {fileID: 114542235532527436, guid: a2bc731c36b059d4683ea33bef4416b1,
+        type: 2}
+      propertyPath: additionalArmorText
+      value: 
+      objectReference: {fileID: 1214472886}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: a2bc731c36b059d4683ea33bef4416b1, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1463735461
 GameObject:
   m_ObjectHideFlags: 0

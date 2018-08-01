@@ -15,6 +15,8 @@ public class CharacterClass : ScriptableObject {
     public Unit unitType = Unit.CONTROLLABLE;
     public enum Unit { CONTROLLABLE, FRIENDLY, NEUTRAL, HOSTILE }
 
+    public float moveSpeed;
+
     ///Stats
     public Stat primaryStat = Stat.STRENGTH;
     public enum Stat { STRENGTH, AGILITY, INTELLIGENCE }

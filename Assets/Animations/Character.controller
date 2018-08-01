@@ -5,7 +5,7 @@ AnimatorController:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: TargetDummy
+  m_Name: Character
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: TakeDamage_Anim
@@ -213,7 +213,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 00cb7b78b104b5d44a32bb345a4a3f09, type: 2}
+  m_Motion: {fileID: 0}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -240,7 +240,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: ae88bd26a6efb4c49b4399b1690cdd25, type: 2}
+  m_Motion: {fileID: 0}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -283,13 +283,13 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 1102552299132189278}
-    m_Position: {x: 540, y: 180, z: 0}
+    m_Position: {x: 552, y: 180, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102985542460158914}
     m_Position: {x: 216, y: 180, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102463083465931498}
-    m_Position: {x: 420, y: 108, z: 0}
+    m_Position: {x: 408, y: 96, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
