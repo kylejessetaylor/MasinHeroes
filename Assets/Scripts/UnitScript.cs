@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.AI;
 
 public class UnitScript : MonoBehaviour {
 
@@ -20,6 +21,11 @@ public class UnitScript : MonoBehaviour {
     //Combat
     public Combat combatState = Combat.IDLE;
     public enum Combat { IDLE, LOOKAT, CHASE, ATTACK, CHANNELCAST }
+
+    //NavMesh Movement
+    [HideInInspector]
+    public Transform moveLocation;
+    protected NavMeshAgent agent;
 
     //Character
     protected string characterName;
@@ -48,7 +54,7 @@ public class UnitScript : MonoBehaviour {
     public float detectionRange;
     protected int baseAttackDamage;
     protected int attackDamage;
-    protected float attackSpeed;
+    protected float attackSpeedMult;
     //Damage gained from items & spells
     [HideInInspector]
     public int additionalAttackDamage;
@@ -135,13 +141,10 @@ public class UnitScript : MonoBehaviour {
         combatState = Combat.IDLE;
 
         //Assigns Animatior
-        AnimationChecks();
+        StartVariableAssignments();
 
         //Updates UI current health/mana
         UpdateHealthManaTexT();
-
-        //Setup for AutoAttack functions
-        AutoAttackStart();
     }
 
     void Update()
@@ -173,19 +176,23 @@ public class UnitScript : MonoBehaviour {
         {
             //Start CHANNEL
         }
-        //Checks for Attack state
+        //Checks for ATTACK state
         else if (combatState == Combat.ATTACK)
         {
-            //Start Attack
+            //Start ATTACK
             AttackSpeedCheck();
         }
-
-        //CHASE starts from Attack State only
-        
+        //Checks for CHASE state
+        else if (combatState == Combat.CHASE)
+        {
+            //Start CHASE
+            Chase();
+        }
         //Checks for LOOKAT state
         else if (combatState == Combat.LOOKAT)
         {
             //Start LOOKAT
+            RotateTowards(attackTarget.transform);
         }
         //Checks for IDLE state
         else if (combatState == Combat.IDLE)
@@ -408,9 +415,15 @@ public class UnitScript : MonoBehaviour {
     }
 
     //Assigns Animations to script variables
-    protected void AnimationChecks()
+    protected void StartVariableAssignments()
     {
+        //Animation
         anim = gameObject.GetComponent<Animator>();
+        //NavMesh Agent
+        agent = GetComponent<NavMeshAgent>();
+        //Rigid Body
+        rb = gameObject.GetComponent<Rigidbody>();
+
     }
 
     //Turns off Animation bools every FixedUpdate
@@ -428,10 +441,23 @@ public class UnitScript : MonoBehaviour {
 
     protected void UpdateHealthManaTexT()
     {
+        //Doesn't let hp/mana view below 0
+        if (currentHealth < 0)
+        {
+            currentHealth = 0;
+        }
+        if (currentMana < 0)
+        {
+            currentMana = 0;
+        }
+        //Stops Decimals showing on HP & MP
+        int hp = (int)currentHealth;
+        int mp = (int)currentMana;      
+
         //currentHealth/maxHealth
-        healthText.text = currentHealth.ToString() + "/" + maxHealth.ToString();
+        healthText.text = hp.ToString() + "/" + maxHealth.ToString();
         //currentMana/maxMana
-        manaText.text = currentMana.ToString() + "/" + maxMana.ToString();
+        manaText.text = mp.ToString() + "/" + maxMana.ToString();
     }
 
     //Resource Regen
@@ -473,26 +499,25 @@ public class UnitScript : MonoBehaviour {
     ///Combat
 
     //Stores whether unit has moved & needs to check radius
-    protected Vector3 currentTrans;
+    //protected Vector3 currentTrans;
     //Target enemy saved as auto-attack target
     [HideInInspector]
     public GameObject attackTarget;
     //Signifies unit is trying to auto attack
     protected bool autoAttacking;
-    
-    protected void AutoAttackStart()
-    {
-        currentTrans = transform.position;
-    }
 
+    [HideInInspector]
+    public Rigidbody rb;
     //Starts Auto-Attack when hostiles are near player or vise versa
     protected void AutoAttack()
     {
         //If unit has moved
-        if (currentTrans != transform.position)
+        if (rb.velocity.magnitude > 0)
         {
             CheckForEnemies();
+            Debug.Log(gameObject + " moved!");
         }
+        CheckForEnemies();
     }
 
     //Checks if an enemy is within range
@@ -522,7 +547,7 @@ public class UnitScript : MonoBehaviour {
         float closestDistance = Mathf.Infinity;
 
         //Check for hostiles
-        for (int i = 0; i < unitListToCheck.Count - 1; i++)
+        for (int i = 0; i < unitListToCheck.Count; i++)
         {
             GameObject target = unitListToCheck[i];
             float targetDistance = Vector3.Distance(transform.position,
@@ -540,7 +565,6 @@ public class UnitScript : MonoBehaviour {
                 //I am attacking
                 autoAttacking = true;
             }
-
         }
         //Stops auto attacking if no enemy unit is near
         if (closestTarget == null)
@@ -553,8 +577,8 @@ public class UnitScript : MonoBehaviour {
             attackTarget = closestTarget;
             //Puts unit into attacking state
             combatState = Combat.ATTACK;
-
         }
+
     }
 
     //Used for AttackSpeed
@@ -562,12 +586,18 @@ public class UnitScript : MonoBehaviour {
     //Performs attack based on Attack Speed
     protected void AttackSpeedCheck()
     {
+        //Faces target
+        Vector3 relativePos = attackTarget.transform.position - transform.position;
+        Quaternion rotation = Quaternion.LookRotation(relativePos);
+        transform.rotation = rotation * Quaternion.Euler(transform.rotation.x, transform.rotation.y, transform.rotation.z);
+        
         //Checks for attack speed CD
-        if (attackSpeed <= Time.time - timeSinceLastAttack)
+        float lastAttackTime = Time.time - timeSinceLastAttack;
+        if (SystemsManager.attackSpeed / (1+attackSpeedMult) <= lastAttackTime
+            && SystemsManager.attackSpeed <= lastAttackTime)
         {
             Attack();
         }
-
     }
 
     //Checks Range for & Attacks
@@ -578,6 +608,9 @@ public class UnitScript : MonoBehaviour {
         //Checks if close enough to attack
         if (distanceToTarget <= range)
         {
+            //Makes sure combat state is ATTACK
+            combatState = Combat.ATTACK;
+
             //Plays attack animation
             anim.SetBool("Attack_Anim", true);
 
@@ -585,24 +618,27 @@ public class UnitScript : MonoBehaviour {
             if (attackTarget.GetComponent<UnitScript>() != null)
             {
                 //Deals auto attack dmg as physical
-                attackTarget.GetComponent<UnitScript>().DamageToTake(1, attackDamage);
+                attackTarget.GetComponent<UnitScript>().DamageToTake(gameObject, 1, totalAttackDamage);
             }
             //Checks for Character.cs & deals dmg
             else
             {
                 //Deals auto attack dmg as physical
-                attackTarget.GetComponent<Character>().DamageToTake(1, attackDamage);
+                attackTarget.GetComponent<Character>().DamageToTake(gameObject, 1, totalAttackDamage);
             }
 
+            timeSinceLastAttack = Time.time;
+
+            RotateTowards(attackTarget.transform);
         }
         //Goes to chase instead
         else
         {
             combatState = Combat.CHASE;
+            Chase();
         }
     }
     
-
     /// <summary>
     /// Causes the targeted unit to take damage.
     /// </summary>
@@ -611,7 +647,7 @@ public class UnitScript : MonoBehaviour {
     /// 2 = Magical | 
     /// 3 = Pure/Raw damage</param>
     /// <param name="damage">The amount of damage the unit will take (unmitigated).</param>
-    protected void DamageToTake(int damageType, float damage)
+    protected void DamageToTake(GameObject attacker, int damageType, float damage)
     {
         //Plays Animation
         anim.SetBool("TakeDamage_Anim", true);
@@ -632,6 +668,9 @@ public class UnitScript : MonoBehaviour {
 
         //Applies damage to take
         currentHealth -= damage;
+        //IF THIS UNIT IS CURRENTLY SELECTED TARGET
+        UpdateHealthManaTexT();
+
         //Checks for death
         if (currentHealth < 0)
         {
@@ -640,6 +679,15 @@ public class UnitScript : MonoBehaviour {
             //Stops Regen & Cancels regen from occuring
             fullHealth = true;
             return;
+        }
+
+        //Turns unit hostile on first attack
+        if (attackTarget == null)
+        {
+            //Assigns attacker to attack target
+            attackTarget = attacker;
+            //Enters Combat State
+            combatState = Combat.ATTACK;
         }
 
         //Allows HP regen to happen
@@ -654,5 +702,41 @@ public class UnitScript : MonoBehaviour {
 
         //Plays Death Animation
         //Plays Death Sound
+    }
+
+    //---------------------------------------------------------------------------------------------------------------------//
+    ///Chase
+    ///
+
+
+    private void RotateTowards(Transform target)
+    {
+        Vector3 direction = (target.position - transform.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(direction);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRotation, Time.deltaTime * 100f);
+    }
+    protected void Chase()
+    {
+        //Faces target if cant move
+        if (agent.speed == 0)
+        {
+            //RotateTowards(attackTarget.transform);
+            ///TODO
+            ///FIX ANIMATION SO IT AFFECTS A CHILD SO I CAN ROTATE THIS OBJECT 
+            Debug.Log("Looking at you");
+        }
+        //Chases target
+        else
+        {
+            agent.destination = attackTarget.transform.position;
+            Debug.Log("Chasing you");
+        }
+
+        //Checks for range & attacks if within range
+        float distanceToTarget = Vector3.Distance(transform.position, attackTarget.transform.position);
+        if (distanceToTarget <= range)
+        {
+            Attack();
+        }
     }
 }

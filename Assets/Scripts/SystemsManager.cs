@@ -8,10 +8,13 @@ static class SystemsManager {
     [Tooltip("Increase this number to make each armor point weaker")]
     static public int rateOfArmor = 600;
 
+    //Base Attack Speed
+    static public float attackSpeed = 2;
+    static public float attackSpeedCap = 0.2f;
+
     //Primary Stat > Damage Conversion
     [Tooltip("Attack damage gained form 1 PrimaryStat")]
     static public int statToAttack = 1;
-
 
     //STR > Health Conversion
     [Tooltip("Health is gained from 1 STR")]

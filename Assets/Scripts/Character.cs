@@ -94,6 +94,7 @@ public class Character : UnitScript {
             abilities.Add(character.abilities[i]);
         }
 }
+    //---------------------------------------------------------------------------------------------------------------------//
 
     protected new void Awake()
     {
@@ -110,6 +111,34 @@ public class Character : UnitScript {
 
     }
 
+
+    //void Start()
+    //{
+    //    //Assigns this unit to the UnitManager class
+    //    AssignToUnitManager(true);
+
+    //    //Current HP/Mana
+    //    currentHealth = maxHealth;
+    //    currentMana = maxMana;
+    //    //Sets combat state
+    //    combatState = Combat.IDLE;
+
+    //    //Assigns Animatior
+    //    AnimationChecks();
+
+    //    //Updates UI current health/mana
+    //    UpdateHealthManaTexT();
+
+    //    //Setup for AutoAttack functions
+    //    AutoAttackStart();
+    //}
+
+    void Update()
+    {
+
+
+    }
+
     //Call when swapping in/out items & on Awake
     ///TODO
     ///AND when items in inventory change
@@ -121,6 +150,18 @@ public class Character : UnitScript {
         //Updates UI with new calculations
         UpdateCharacterDisplay();
     }
+
+    new void FixedUpdate()
+    {
+        //Resource Regen of Health & Mana
+        HealthManaRegen();
+
+        //Turns off animations to keep from looping
+        TurnOffAnimation();
+    }
+
+    //---------------------------------------------------------------------------------------------------------------------//
+
 
     #region StatCalculations
 
@@ -359,29 +400,6 @@ public class Character : UnitScript {
     }
 
     #endregion
-
-    //---------------------------------------------------------------------------------------------------------------------//
-
-    void Start()
-    {
-        //Assigns this unit to the UnitManager class
-        AssignToUnitManager(true);
-
-        //Current HP/Mana
-        currentHealth = maxHealth;
-        currentMana = maxMana;
-
-        //Updates UI current health/mana
-        UpdateHealthManaTexT();
-
-        //Setup for AutoAttack functions
-        AutoAttackStart();
-    }
-
-    void Update () {
-
-
-	}
 
     //---------------------------------------------------------------------------------------------------------------------//
     ///Combat
